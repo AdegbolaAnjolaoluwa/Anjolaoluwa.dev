@@ -4,6 +4,21 @@ import { ProjectCard } from "./ProjectCard";
 
 const projects = [
   {
+    title: "Stackle Vest",
+    role: "Front End Developer & Marketing Strategist",
+    stack: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    shortDescription:
+      "A professional role combining frontend engineering and digital marketing strategy.",
+    detailedDescription:
+      "At Stackle Vest, I operate in a dual capacity — building and maintaining responsive, high-quality web interfaces while also developing and executing digital marketing strategies. My work bridges the gap between product and growth, ensuring that what we build is both technically sound and effectively positioned in the market.",
+    keyFeatures: [
+      "Building and maintaining responsive web interfaces",
+      "Developing and executing digital marketing strategies",
+      "Bridging design, development, and growth objectives",
+      "Collaborating cross-functionally across product and marketing teams",
+    ],
+  },
+  {
     title: "ConsultifyCare Telemedicine Platform",
     role: "Front End Developer & Co founder",
     stack: ["Next.js", "Tailwind CSS", "Supabase", "Go (Fiber)"],
