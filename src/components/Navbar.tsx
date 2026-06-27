@@ -95,7 +95,7 @@ export const Navbar = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.name}
@@ -103,20 +103,20 @@ export const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium transition-colors hover:text-[#25D366] relative cursor-pointer ${
+                className={`text-sm font-medium relative cursor-pointer px-4 py-1.5 rounded-full transition-colors ${
                   activeSection === link.href.substring(1)
                     ? "text-primary"
-                    : "text-foreground/80"
+                    : "text-foreground/70 hover:text-foreground"
                 }`}
               >
-                {link.name}
                 {activeSection === link.href.substring(1) && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    className="absolute inset-0 bg-primary/10 rounded-full -z-10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
+                {link.name}
               </motion.button>
             ))}
           </div>

@@ -163,12 +163,21 @@ All colors MUST be HSL.
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
-  
+
   .section-padding {
-    @apply py-20 px-6 md:px-12 lg:px-24;
+    @apply py-24 px-6 md:px-12 lg:px-24;
   }
-  
+
   .container-custom {
     @apply max-w-7xl mx-auto;
+  }
+
+  .bg-grid-dots {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .card-glow {
+    box-shadow: 0 0 40px -12px hsl(var(--primary) / 0.25);
   }
 }

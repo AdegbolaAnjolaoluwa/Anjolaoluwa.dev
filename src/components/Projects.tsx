@@ -20,7 +20,7 @@ const projects = [
   },
   {
     title: "ConsultifyCare Telemedicine Platform",
-    role: "Front End Developer & Co founder",
+    role: "Front End Developer & Co-founder",
     stack: ["Next.js", "Tailwind CSS", "Supabase", "Go (Fiber)"],
     shortDescription:
       "A developing telemedicine platform focused on improving digital access to healthcare.",
@@ -63,36 +63,40 @@ const projects = [
       "Nomination submission form",
       "Secure data storage",
     ],
-    
   },
 ];
 
 export const Projects = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <section id="projects" className="section-padding">
       <div className="container-custom">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary text-center mb-3">
+            Portfolio
+          </p>
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
             Featured <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            A selection of projects showcasing my work in frontend development,
-            system design, and full stack integration.
+          <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+            A selection of work spanning frontend engineering, system design, and
+            full stack integration.
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <ProjectCard key={project.title} {...project} index={index} />
+              <ProjectCard
+                key={project.title}
+                {...project}
+                index={index}
+                featured={index === 0}
+              />
             ))}
           </div>
         </motion.div>
