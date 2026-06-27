@@ -27,8 +27,9 @@ export const About = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              I'm a Front End Developer dedicated to building clean, fast, and
-              user friendly digital products. My core focus is creating smooth,
+              I'm a Front End Developer and Marketing Strategist currently
+              working at Stackle Vest, where I combine frontend engineering with
+              growth-focused digital strategy. My core focus is creating smooth,
               responsive interfaces that combine strong visual structure with
               real world usability. I work extensively with React, Next.js,
               TypeScript, and Tailwind CSS to transform ideas into reliable,
@@ -67,7 +68,8 @@ export const About = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="font-medium text-primary"
             >
-              I'm committed to continuous learning, disciplined improvement, and
+              As a final year Computer Science student at Nile University, I'm
+              committed to continuous learning, disciplined improvement, and
               building solutions that solve real problems at scale. My long term
               goal is to become a highly skilled engineer capable of delivering
               full, production ready systems that people trust and enjoy using.

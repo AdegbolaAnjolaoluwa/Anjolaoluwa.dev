@@ -4,10 +4,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const timelineData = [
   {
-    year: "2023 — Present",
+    year: "2026 — Present",
+    title: "Front End Developer & Marketing Strategist",
+    organization: "Stackle Vest",
+    description: "Dual role combining frontend engineering with strategic marketing.",
+    highlights: [
+      "Building and maintaining responsive web interfaces",
+      "Developing and executing digital marketing strategies",
+      "Bridging design, development, and growth objectives",
+      "Collaborating cross-functionally across product and marketing teams",
+    ],
+  },
+  {
+    year: "2023 — Present (Final Year)",
     title: "Computer Science Student",
     organization: "Nile University",
-    description: "Expected graduation: 2027",
+    description: "Final year Computer Science student — expected graduation 2027",
     highlights: [
       "Focus on software engineering and system design",
       "Academic work in Python, Java, and R",

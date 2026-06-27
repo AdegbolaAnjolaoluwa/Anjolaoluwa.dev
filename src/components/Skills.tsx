@@ -30,9 +30,19 @@ const skillsData = [
     skills: [
       "Supabase",
       "Git & GitHub",
-      "postgress",
+      "PostgreSQL",
       "VS Code",
       "REST APIs",
+    ],
+  },
+  {
+    category: "Marketing & Strategy",
+    skills: [
+      "Digital Marketing",
+      "Content Strategy",
+      "Brand Positioning",
+      "Growth Strategy",
+      "Social Media",
     ],
   },
   {
