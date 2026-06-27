@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Briefcase, GraduationCap, Film, Code2, Rocket } from "lucide-react";
 
 const timelineData = [
   {
@@ -14,6 +14,7 @@ const timelineData = [
       "Bridging design, development, and growth objectives",
       "Collaborating cross-functionally across product and marketing teams",
     ],
+    icon: Briefcase,
   },
   {
     year: "2023 — Present (Final Year)",
@@ -25,22 +26,23 @@ const timelineData = [
       "Academic work in Python, Java, and R",
       "Building practical projects alongside coursework",
     ],
+    icon: GraduationCap,
   },
-    {
-  "year": "2022–Present",
-  "title": "Videography & Creative Production",
-  "organization": "Independent Work",
-  "description": "Growing as a visual storyteller with a focus on clean, stable, and high quality video production.",
-  "highlights": [
-    "Proficient videography with strong understanding of composition and lighting",
-    "Skilled use of gimbal stabilizers for smooth, cinematic motion",
-    "Video editing with attention to pacing, storytelling, and color balance",
-    "Experience capturing and producing content using compact/mobile setups when needed"
-  ],
-},
-
   {
-    year: "2024–2025",
+    year: "2022 — Present",
+    title: "Videography & Creative Production",
+    organization: "Independent Work",
+    description: "Growing as a visual storyteller with a focus on clean, stable, and high quality video production.",
+    highlights: [
+      "Proficient videography with strong understanding of composition and lighting",
+      "Skilled use of gimbal stabilizers for smooth, cinematic motion",
+      "Video editing with attention to pacing, storytelling, and color balance",
+      "Experience capturing and producing content using compact/mobile setups",
+    ],
+    icon: Film,
+  },
+  {
+    year: "2024 — 2025",
     title: "Meta Front-End Developer Program",
     organization: "Professional Certification",
     description: "Completed comprehensive frontend development training",
@@ -49,9 +51,10 @@ const timelineData = [
       "Modern web development best practices",
       "UX/UI principles and responsive design",
     ],
+    icon: Code2,
   },
   {
-    year: "2025–Present",
+    year: "2025 — Present",
     title: "Backend Development Journey",
     organization: "Self Directed Learning",
     description: "Expanding into full stack development",
@@ -61,96 +64,79 @@ const timelineData = [
       "RESTful API architecture",
       "Production workflow understanding",
     ],
-  },
-
-  {
-    year: "Ongoing",
-    title: "Continuous Growth",
-    organization: "Professional Development",
-    description: "Building production ready systems",
-    highlights: [
-      "Real world project experience",
-      "Clean code practices and attention to detail",
-      "Scalable system design",
-      "User centered development approach",
-    ],
+    icon: Rocket,
   },
 ];
 
 export const Timeline = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <section id="experience" className="section-padding">
       <div className="container-custom">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary text-center mb-3">
+            Journey
+          </p>
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
             Experience & <span className="text-gradient">Learning</span>
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            My journey through formal education, professional training, and
-            continuous self improvement.
+          <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+            My journey through professional roles, formal education, and continuous
+            self-improvement.
           </p>
 
-          <div className="max-w-4xl mx-auto relative">
-            {/* Timeline Line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border hidden sm:block" />
-
-            <div className="space-y-12">
-              {timelineData.map((item, index) => (
+          <div className="max-w-4xl mx-auto space-y-4">
+            {timelineData.map((item, index) => {
+              const Icon = item.icon;
+              return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className={`relative flex items-center ${
-                    index % 2 === 0
-                      ? "md:flex-row"
-                      : "md:flex-row-reverse"
-                  } flex-col`}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-6 md:p-8 rounded-2xl border border-border/60 bg-card hover:border-primary/40 hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background z-10 transform md:-translate-x-1/2 hidden sm:block" />
+                  {/* Top gradient accent */}
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
-                  {/* Content Card */}
-                  <div className="w-full md:w-[calc(50%-2rem)] sm:ml-8 md:ml-0">
-                    <Card className="hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/50">
-                      <CardHeader>
-                        <div className="text-sm font-semibold text-primary mb-2">
+                  <div className="flex items-start gap-5">
+                    {/* Icon */}
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-base md:text-lg font-bold leading-tight">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-0.5">{item.organization}</p>
+                        </div>
+                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap self-start flex-shrink-0">
                           {item.year}
-                        </div>
-                        <CardTitle className="text-xl">{item.title}</CardTitle>
-                        <div className="text-sm text-muted-foreground">
-                          {item.organization}
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <p className="text-sm">{item.description}</p>
-                        <ul className="space-y-1.5">
-                          {item.highlights.map((highlight, idx) => (
-                            <li
-                              key={idx}
-                              className="text-sm text-muted-foreground flex items-start"
-                            >
-                              <span className="text-primary mr-2">•</span>
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
+                        </span>
+                      </div>
+
+                      <p className="text-sm text-foreground/55 mb-4">{item.description}</p>
+
+                      <ul className="space-y-1.5">
+                        {item.highlights.map((h, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-foreground/65">
+                            <span className="text-primary mt-0.5 flex-shrink-0 font-bold">›</span>
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
