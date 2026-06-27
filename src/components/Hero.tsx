@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { ArrowRight, Download } from "lucide-react";
+import { Badge } from "./ui/badge";
+import { ArrowRight, Mail } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 export const Hero = () => {
@@ -45,7 +46,24 @@ export const Hero = () => {
               <span className="text-gradient">Samuel</span>
             </motion.h1>
 
-            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-wrap items-center justify-center gap-3 pt-2"
+            >
+              <Badge className="text-sm px-4 py-1.5 rounded-full font-medium bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors">
+                Front End Developer
+              </Badge>
+              <span className="text-muted-foreground/50 hidden sm:block">·</span>
+              <Badge className="text-sm px-4 py-1.5 rounded-full font-medium bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors">
+                Marketing Strategist
+              </Badge>
+              <span className="text-muted-foreground/50 hidden sm:block">·</span>
+              <Badge className="text-sm px-4 py-1.5 rounded-full font-medium bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors">
+                Final Year CS Student
+              </Badge>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -68,7 +86,7 @@ export const Hero = () => {
                 onClick={() => scrollToSection("contact")}
               >
                 Contact Me
-                <Download className="ml-2 h-5 w-5" />
+                <Mail className="ml-2 h-5 w-5" />
               </Button>
             </motion.div>
           </motion.div>
