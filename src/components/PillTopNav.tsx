@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import PillNav, { type PillNavItem } from "./PillNav";
 
@@ -20,7 +18,6 @@ const navItems: PillNavItem[] = [
 ];
 
 export const PillTopNav = () => {
-  const { theme, setTheme } = useTheme();
   const [activeSection, setActiveSection] = useState("home");
 
   const whatsappNumber = (import.meta as unknown as { env?: Record<string, string> }).env
@@ -77,18 +74,6 @@ export const PillTopNav = () => {
           >
             <WhatsAppIcon className="h-4 w-4" />
           </a>
-          <button
-            type="button"
-            className="pill-icon-btn"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            aria-label="Toggle theme"
-          >
-            {theme === "light" ? (
-              <Moon className="h-4 w-4" />
-            ) : (
-              <Sun className="h-4 w-4" />
-            )}
-          </button>
         </>
       }
     />
