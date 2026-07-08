@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { reveal, revealGroup, revealViewport } from "@/lib/motion";
 
 export const Contact = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const whatsappNumber = (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_WHATSAPP_NUMBER as
     | string
@@ -25,7 +25,7 @@ export const Contact = () => {
       borderColor: "hover:border-blue-500/30",
     },
     {
-      icon: MessageCircle,
+      icon: WhatsAppIcon,
       label: "WhatsApp",
       value: "Chat Now",
       href: whatsappHref,
@@ -49,27 +49,27 @@ export const Contact = () => {
     <section id="contact" className="section-padding bg-muted/20">
       <div className="container-custom">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={revealGroup}
+          initial="hidden"
+          whileInView="show"
+          viewport={revealViewport}
           className="text-center"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">
-            Contact
-          </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.05] tracking-tight">
+          <motion.p variants={reveal} className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-primary mb-4">
+            <span className="text-primary/50">05</span> &nbsp;/&nbsp; Contact
+          </motion.p>
+          <motion.h2 variants={reveal} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.05] tracking-tight">
             Let's Build Something
             <br />
             <span className="text-gradient">Great Together.</span>
-          </h2>
-          <p className="text-muted-foreground text-lg mb-16 max-w-lg mx-auto">
+          </motion.h2>
+          <motion.p variants={reveal} className="text-muted-foreground text-lg mb-16 max-w-lg mx-auto">
             Available for freelance projects, collaborations, and exciting
-            opportunities. I typically respond within 24–48 hours.
-          </p>
+            opportunities. I typically respond within 24-48 hours.
+          </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {contacts.map((c, i) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+            {contacts.map((c) => {
               const Icon = c.icon;
               return (
                 <motion.a
@@ -77,19 +77,23 @@ export const Contact = () => {
                   href={c.href}
                   target={c.external ? "_blank" : undefined}
                   rel={c.external ? "noopener noreferrer" : undefined}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                  className={`group p-6 rounded-2xl border border-border/60 bg-card ${c.borderColor} hover:shadow-lg transition-all duration-300 text-left flex flex-col gap-4`}
+                  variants={reveal}
+                  whileHover={{ y: -6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className={`group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-b from-background to-background/60 p-8 text-left flex flex-col gap-5 transition-colors duration-300 ${c.borderColor} hover:shadow-xl`}
                 >
-                  <div className={`w-11 h-11 rounded-xl ${c.bgColor} flex items-center justify-center`}>
-                    <Icon className={`h-5 w-5 ${c.iconColor}`} />
+                  {/* Glow on hover */}
+                  <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${c.bgColor} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                  <div className={`relative w-16 h-16 rounded-2xl ${c.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className={`h-7 w-7 ${c.iconColor}`} />
                   </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1">
+
+                  <div className="relative">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2">
                       {c.label}
                     </p>
-                    <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors break-all">
+                    <p className="text-lg font-bold text-foreground group-hover:text-primary transition-colors break-all">
                       {c.value}
                     </p>
                   </div>

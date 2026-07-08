@@ -1,4 +1,5 @@
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,11 +20,29 @@ export const Footer = () => {
           <div>
             <span className="text-lg font-bold text-gradient">Anjolaoluwa</span>
             <p className="text-xs text-muted-foreground mt-1">
-              © {currentYear} Adegbola Anjolaloluwa Samuel. All rights reserved.
+              © {currentYear} Adegbola Anjolaoluwa Samuel. All rights reserved.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
+            <a
+              href="https://www.linkedin.com/in/anjola-adegbola-574146353/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center text-muted-foreground hover:text-[#0A66C2] hover:bg-blue-500/10 transition-all"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="https://github.com/AdegbolaAnjolaoluwa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all"
+              aria-label="GitHub"
+            >
+              <Github className="h-3.5 w-3.5" />
+            </a>
             <a
               href="tel:07073315998"
               className="w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
@@ -38,7 +57,7 @@ export const Footer = () => {
               className="w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center text-[#25D366] hover:bg-green-500/10 transition-all"
               aria-label="WhatsApp"
             >
-              <MessageCircle className="h-3.5 w-3.5" />
+              <WhatsAppIcon className="h-3.5 w-3.5" />
             </a>
             <a
               href="mailto:Anjeesax@gmail.com"
@@ -50,9 +69,12 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-border/30 text-center">
+        <div className="mt-6 pt-6 border-t border-border/30 flex flex-col items-center gap-1">
+          <p className="font-signature text-3xl md:text-4xl text-foreground/80 leading-none">
+            Anjolaoluwa
+          </p>
           <p className="text-xs text-muted-foreground/50">
-            Looking forward to working with you!
+            Thanks for stopping by. Let&apos;s build something.
           </p>
         </div>
       </div>

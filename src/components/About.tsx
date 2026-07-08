@@ -1,42 +1,35 @@
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { Code2, Briefcase, GraduationCap, Zap } from "lucide-react";
+import { reveal, revealGroup, revealViewport } from "@/lib/motion";
 
 const stats = [
-  { icon: Code2, label: "Years Coding", value: "3+", color: "text-blue-400" },
-  { icon: Briefcase, label: "Projects Built", value: "5+", color: "text-violet-400" },
-  { icon: GraduationCap, label: "CS Student", value: "Final Year", color: "text-emerald-400" },
-  { icon: Zap, label: "Current Role", value: "Stackle Vest", color: "text-amber-400" },
+  { label: "Years Coding", value: "3+" },
+  { label: "Projects Built", value: "5+" },
+  { label: "CS Degree", value: "Grad 2027" },
+  { label: "Current Role", value: "Stacklevest" },
 ];
 
 export const About = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   return (
     <section id="about" className="section-padding bg-muted/20">
       <div className="container-custom">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={revealGroup}
+          initial="hidden"
+          whileInView="show"
+          viewport={revealViewport}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
         >
           {/* Left: Text */}
           <div className="space-y-8">
             <div>
               <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.1 }}
-                className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4"
+                variants={reveal}
+                className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-primary mb-4"
               >
-                About Me
+                <span className="text-primary/50">01</span> &nbsp;/&nbsp; About Me
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 }}
+                variants={reveal}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
               >
                 Building at the intersection of{" "}
@@ -45,22 +38,21 @@ export const About = () => {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 }}
+              variants={reveal}
               className="space-y-5 text-base md:text-lg text-foreground/70 leading-relaxed"
             >
               <p>
                 I'm a Front End Developer and Marketing Strategist at{" "}
-                <span className="text-foreground font-semibold">Stackle Vest</span>,
+                <span className="text-foreground font-semibold">Stacklevest</span>,
                 combining clean engineering with growth-focused digital strategy. My core
                 focus is building smooth, responsive interfaces with React, Next.js,
                 TypeScript, and Tailwind CSS.
               </p>
               <p>
-                Beyond the frontend, I'm expanding into backend development — learning
-                Go and Fiber to understand scalable APIs and data systems — while
-                completing my final year of Computer Science at Nile University.
+                Beyond the frontend, I'm expanding into backend development,
+                learning Go and Fiber to understand scalable APIs and data
+                systems, while studying Computer Science at Nile University
+                (graduating 2027).
               </p>
               <p className="text-primary font-medium">
                 I write clean code, pay attention to detail, and build products that
@@ -70,23 +62,30 @@ export const About = () => {
           </div>
 
           {/* Right: Stats bento */}
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, i) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.25 + i * 0.1 }}
-                  className="p-6 rounded-2xl border border-border/60 bg-card hover:border-primary/40 hover:shadow-lg transition-all duration-300"
-                >
-                  <Icon className={`h-5 w-5 mb-4 ${stat.color}`} />
-                  <p className="text-2xl md:text-3xl font-bold mb-1 tracking-tight">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </motion.div>
-              );
-            })}
+          <div className="grid grid-cols-2 gap-6">
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={reveal}
+                className="group relative overflow-hidden"
+              >
+                {/* Minimalist card with just number and label */}
+                <div className="space-y-3">
+                  {/* Gradient underline */}
+                  <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 group-hover:w-full transition-all duration-300" />
+
+                  {/* Number - responsive sizing for long text like "Stacklevest" */}
+                  <p className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground line-clamp-2">
+                    {stat.value}
+                  </p>
+
+                  {/* Label */}
+                  <p className="text-sm md:text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                    {stat.label}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Briefcase, GraduationCap, Film, Code2, Rocket } from "lucide-react";
+import { reveal, revealGroup, revealViewport } from "@/lib/motion";
 
 const timelineData = [
   {
-    year: "2026 — Present",
+    year: "2026 - Present",
     title: "Front End Developer & Marketing Strategist",
-    organization: "Stackle Vest",
+    organization: "Stacklevest",
     description: "Dual role combining frontend engineering with strategic marketing.",
     highlights: [
       "Building and maintaining responsive web interfaces",
@@ -17,10 +17,10 @@ const timelineData = [
     icon: Briefcase,
   },
   {
-    year: "2023 — Present (Final Year)",
+    year: "2023 - 2027 (Expected)",
     title: "Computer Science Student",
     organization: "Nile University",
-    description: "Final year Computer Science student — expected graduation 2027",
+    description: "Pursuing a B.Sc. in Computer Science, expected graduation 2027.",
     highlights: [
       "Focus on software engineering and system design",
       "Academic work in Python, Java, and R",
@@ -29,7 +29,7 @@ const timelineData = [
     icon: GraduationCap,
   },
   {
-    year: "2022 — Present",
+    year: "2022 - Present",
     title: "Videography & Creative Production",
     organization: "Independent Work",
     description: "Growing as a visual storyteller with a focus on clean, stable, and high quality video production.",
@@ -42,7 +42,7 @@ const timelineData = [
     icon: Film,
   },
   {
-    year: "2024 — 2025",
+    year: "2024 - 2025",
     title: "Meta Front-End Developer Program",
     organization: "Professional Certification",
     description: "Completed comprehensive frontend development training",
@@ -54,7 +54,7 @@ const timelineData = [
     icon: Code2,
   },
   {
-    year: "2025 — Present",
+    year: "2025 - Present",
     title: "Backend Development Journey",
     organization: "Self Directed Learning",
     description: "Expanding into full stack development",
@@ -69,27 +69,25 @@ const timelineData = [
 ];
 
 export const Timeline = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   return (
     <section id="experience" className="section-padding">
       <div className="container-custom">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={revealGroup}
+          initial="hidden"
+          whileInView="show"
+          viewport={revealViewport}
         >
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary text-center mb-3">
-            Journey
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+          <motion.p variants={reveal} className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-primary mb-3">
+            <span className="text-primary/50">04</span> &nbsp;/&nbsp; Journey
+          </motion.p>
+          <motion.h2 variants={reveal} className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
             Experience & <span className="text-gradient">Learning</span>
-          </h2>
-          <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={reveal} className="text-muted-foreground text-lg mb-16 max-w-2xl">
             My journey through professional roles, formal education, and continuous
             self-improvement.
-          </p>
+          </motion.p>
 
           <div className="max-w-4xl mx-auto space-y-4">
             {timelineData.map((item, index) => {
@@ -97,10 +95,8 @@ export const Timeline = () => {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: index * 0.1 }}
-                  className="group relative p-6 md:p-8 rounded-2xl border border-border/60 bg-card hover:border-primary/40 hover:shadow-lg transition-all duration-300 overflow-hidden"
+                  variants={reveal}
+                  className="card-surface group p-6 md:p-8 overflow-hidden"
                 >
                   {/* Top gradient accent */}
                   <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
@@ -117,7 +113,7 @@ export const Timeline = () => {
                           <h3 className="text-base md:text-lg font-bold leading-tight">{item.title}</h3>
                           <p className="text-sm text-muted-foreground mt-0.5">{item.organization}</p>
                         </div>
-                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap self-start flex-shrink-0">
+                        <span className="font-mono text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap self-start flex-shrink-0">
                           {item.year}
                         </span>
                       </div>

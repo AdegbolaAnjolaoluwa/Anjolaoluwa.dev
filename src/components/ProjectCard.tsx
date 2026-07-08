@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Badge } from "./ui/badge";
-import { ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { Button } from "./ui/button";
+import { reveal, revealViewport } from "@/lib/motion";
 
 interface ProjectCardProps {
+  slug: string;
   title: string;
   role: string;
   stack: string[];
@@ -12,11 +15,13 @@ interface ProjectCardProps {
   keyFeatures: string[];
   liveUrl?: string;
   githubUrl?: string;
+  hasCaseStudy?: boolean;
   index: number;
   featured?: boolean;
 }
 
 export const ProjectCard = ({
+  slug,
   title,
   role,
   stack,
@@ -25,6 +30,7 @@ export const ProjectCard = ({
   keyFeatures,
   liveUrl,
   githubUrl,
+  hasCaseStudy,
   index,
   featured,
 }: ProjectCardProps) => {
@@ -32,13 +38,14 @@ export const ProjectCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.12 }}
+      variants={reveal}
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      transition={{ delay: index * 0.06 }}
       className={featured ? "lg:col-span-2" : ""}
     >
-      <div className="group relative h-full rounded-2xl border border-border/60 bg-card p-7 md:p-8 hover:border-primary/40 hover:shadow-xl transition-all duration-300 overflow-hidden">
+      <div className="card-surface group h-full p-7 md:p-8 overflow-hidden">
         {/* Gradient accent line */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
 
@@ -49,7 +56,7 @@ export const ProjectCard = ({
           {/* Header */}
           <div className="flex items-start justify-between mb-6">
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold tracking-[0.2em] text-primary/50 mb-2 block">{num}</span>
+              <span className="font-mono text-xs font-medium tracking-[0.2em] text-primary/50 mb-2 block">{num}</span>
               <h3 className="text-xl md:text-2xl font-bold mb-1.5 leading-tight">{title}</h3>
               <p className="text-sm font-semibold text-primary">{role}</p>
             </div>
@@ -100,6 +107,17 @@ export const ProjectCard = ({
               ))}
             </ul>
           </div>
+
+          {/* Case study link */}
+          {hasCaseStudy && (
+            <Link
+              to={`/projects/${slug}`}
+              className="group/link mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+            >
+              Read case study
+              <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-0.5" />
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>

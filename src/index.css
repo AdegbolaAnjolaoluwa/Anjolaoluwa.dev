@@ -71,32 +71,37 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
+    /* True near-black with only a hint of cool. Saturation kept very low so
+       the page reads deep/neutral, not "blue-black". Blue lives in accents. */
+    --background: 240 10% 4%;
+    --foreground: 210 20% 98%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    /* Card surface is a clear step lighter than the page so cards actually
+       separate, with a subtle cool tint rather than saturated navy. */
+    --card: 240 8% 8%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 210 20% 98%;
 
     --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
+    --primary-foreground: 240 10% 4%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 6% 14%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 240 6% 13%;
+    --muted-foreground: 240 5% 65%;
 
     --accent: 217 91% 60%;
-    --accent-foreground: 222 47% 11%;
+    --accent-foreground: 240 10% 4%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
+    /* Slightly brighter, crisper borders so card edges read clearly. */
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
     --ring: 217 91% 60%;
 
     /* Custom Portfolio Colors - Dark Mode */
@@ -134,7 +139,10 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   html {
@@ -161,7 +169,7 @@ All colors MUST be HSL.
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+    @apply text-primary;
   }
 
   .section-padding {
@@ -173,8 +181,50 @@ All colors MUST be HSL.
   }
 
   .bg-grid-dots {
-    background-image: radial-gradient(circle, hsl(var(--primary) / 0.12) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-image: radial-gradient(circle, hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* One card treatment used site-wide: sharper corners, a surface that clearly
+     reads above the page, a crisp border, a subtle top highlight, and a
+     restrained lift on hover. */
+  .card-surface {
+    position: relative;
+    border-radius: 0.75rem; /* 12px, sharper than the old 16px */
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    transition:
+      border-color 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* Top edge highlight: a hairline of light that makes the surface feel lit. */
+  .card-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding-top: 1px;
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--foreground) / 0.08),
+      transparent 40%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .card-surface:hover {
+    border-color: hsl(var(--primary) / 0.5);
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 0 hsl(var(--foreground) / 0.05) inset,
+      0 12px 30px -12px hsl(0 0% 0% / 0.6);
   }
 
   .card-glow {
