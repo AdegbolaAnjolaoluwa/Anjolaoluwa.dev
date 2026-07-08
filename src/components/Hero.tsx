@@ -52,6 +52,16 @@ export const Hero = () => {
       {/* Contained ambient glow: a subtle accent, not a corner wash */}
       <div className="absolute top-24 -left-24 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
 
+      {/* Mobile/tablet memoji: pinned top-right, hidden once the desktop layout takes over */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="lg:hidden absolute top-20 -right-2 w-48 h-60 sm:w-52 sm:h-72 z-10"
+      >
+        <WavingMemoji />
+      </motion.div>
+
       {/* Content: split layout with memoji on right */}
       <div className="relative z-10 container-custom w-full px-6 pt-20 pb-12">
         <div className="flex items-center justify-between gap-12 lg:gap-32">
@@ -62,22 +72,15 @@ export const Hero = () => {
             initial="hidden"
             animate="show"
           >
-            {/* Kicker + availability, with mobile memoji riding alongside */}
-            <motion.div variants={rise} className="flex items-center justify-between gap-3 mb-6">
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-2 w-2 2xl:h-2.5 2xl:w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 2xl:h-2.5 2xl:w-2.5 bg-green-500" />
-                </span>
-                <span className="font-mono text-xs md:text-sm 2xl:text-base uppercase tracking-[0.18em] text-muted-foreground">
-                  Open to opportunities
-                </span>
-              </div>
-
-              {/* Mobile/tablet memoji: sits in-flow so it never overlaps the name text */}
-              <div className="lg:hidden w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0">
-                <WavingMemoji />
-              </div>
+            {/* Kicker + availability */}
+            <motion.div variants={rise} className="flex items-center gap-3 mb-6">
+              <span className="relative flex h-2 w-2 2xl:h-2.5 2xl:w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 2xl:h-2.5 2xl:w-2.5 bg-green-500" />
+              </span>
+              <span className="font-mono text-xs md:text-sm 2xl:text-base uppercase tracking-[0.18em] text-muted-foreground">
+                Open to opportunities
+              </span>
             </motion.div>
 
             {/* Name */}
