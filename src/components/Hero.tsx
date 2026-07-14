@@ -60,9 +60,20 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden self-center mx-auto w-56 h-72 sm:self-end sm:mx-0 sm:w-48 sm:h-64"
+            className="lg:hidden relative self-center mx-auto w-72 h-96 sm:self-end sm:mx-0 sm:w-48 sm:h-64"
           >
             <WavingMemoji />
+
+            {/* Speech bubble: phone only, greets whoever's landing on the page */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="sm:hidden absolute top-2 right-0 z-20 bg-card text-foreground text-sm font-semibold px-4 py-2 rounded-2xl rounded-bl-sm shadow-lg border border-border/60"
+            >
+              Hi, welcome!
+              <span className="absolute -bottom-1.5 left-5 w-3 h-3 bg-card border-b border-r border-border/60 rotate-45" />
+            </motion.div>
           </motion.div>
 
           {/* Left side: content */}
