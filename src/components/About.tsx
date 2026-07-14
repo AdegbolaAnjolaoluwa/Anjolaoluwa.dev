@@ -62,12 +62,12 @@ export const About = () => {
           </div>
 
           {/* Right: Stats bento */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6 min-w-0">
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={reveal}
-                className="group relative overflow-hidden"
+                className="group relative overflow-hidden min-w-0"
               >
                 {/* Minimalist card with just number and label */}
                 <div className="space-y-3">
@@ -75,7 +75,7 @@ export const About = () => {
                   <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 group-hover:w-full transition-all duration-300" />
 
                   {/* Number - responsive sizing for long text like "Stacklevest" */}
-                  <p className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground line-clamp-2">
+                  <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground break-words">
                     {stat.value}
                   </p>
 
