@@ -55,12 +55,12 @@ export const Hero = () => {
       {/* Content: split layout with memoji on right */}
       <div className="relative z-10 container-custom w-full px-6 pt-20 pb-12">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-32">
-          {/* Mobile/tablet memoji: sits above the text in normal flow, hidden once the desktop layout takes over */}
+          {/* Mobile/tablet memoji: the first thing you see, centered and large, hidden once the desktop layout takes over */}
           <motion.div
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden self-end w-40 h-52 sm:w-48 sm:h-64"
+            className="lg:hidden self-center mx-auto w-56 h-72 sm:w-64 sm:h-80"
           >
             <WavingMemoji />
           </motion.div>
