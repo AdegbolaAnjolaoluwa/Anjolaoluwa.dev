@@ -52,19 +52,19 @@ export const Hero = () => {
       {/* Contained ambient glow: a subtle accent, not a corner wash */}
       <div className="absolute top-24 -left-24 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
 
-      {/* Mobile/tablet memoji: pinned top-right, hidden once the desktop layout takes over */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.7 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="lg:hidden absolute top-20 -right-2 w-48 h-60 sm:w-52 sm:h-72 z-10"
-      >
-        <WavingMemoji />
-      </motion.div>
-
       {/* Content: split layout with memoji on right */}
       <div className="relative z-10 container-custom w-full px-6 pt-20 pb-12">
-        <div className="flex items-center justify-between gap-12 lg:gap-32">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-32">
+          {/* Mobile/tablet memoji: sits above the text in normal flow, hidden once the desktop layout takes over */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden self-end w-40 h-52 sm:w-48 sm:h-64"
+          >
+            <WavingMemoji />
+          </motion.div>
+
           {/* Left side: content */}
           <motion.div
             className="flex-1 max-w-3xl"
